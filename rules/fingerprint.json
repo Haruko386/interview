@@ -1,0 +1,122 @@
+[
+  {
+    "id": "ssh-openssh",
+    "protocol": "SSH",
+    "priority": 100,
+    "match": "SSH-\\d+\\.\\d+-OpenSSH_",
+    "product": { "re": "SSH-\\d+\\.\\d+-([^\\s_]+)", "tpl": "$1" },
+    "version": { "re": "SSH-\\d+\\.\\d+-OpenSSH_([^\\s]+)", "tpl": "$1" },
+    "os": { "re": "SSH-\\d+\\.\\d+-OpenSSH_\\S+\\s+([A-Za-z][A-Za-z0-9.+]*)(?:-\\d+)?", "tpl": "$1" },
+    "confidence": 0.95
+  },
+  {
+    "id": "http-nginx",
+    "protocol": "HTTP",
+    "priority": 95,
+    "match": "(?is)^HTTP/.*\\r?\\nServer:\\s*nginx/",
+    "product": { "re": "(?im)^Server:\\s*([^\\s/\\(]+)", "tpl": "$1" },
+    "version": { "re": "(?im)^Server:\\s*nginx/([^\\s\\(]+)", "tpl": "$1" },
+    "os": { "re": "(?im)^Server:\\s*nginx/[^\\s\\(]+\\s*\\(([^\\)]+)\\)", "tpl": "$1" },
+    "confidence": 0.94
+  },
+  {
+    "id": "http-apache",
+    "protocol": "HTTP",
+    "priority": 94,
+    "match": "(?is)^HTTP/.*\\r?\\nServer:\\s*Apache/",
+    "product": { "re": "(?im)^Server:\\s*([^\\s/\\(]+)", "tpl": "$1" },
+    "version": { "re": "(?im)^Server:\\s*Apache/([^\\s\\(]+)", "tpl": "$1" },
+    "os": { "re": "(?im)^Server:\\s*Apache/[^\\s\\(]+\\s*\\(([^\\)]+)\\)", "tpl": "$1" },
+    "confidence": 0.94
+  },
+  {
+    "id": "http-jetty",
+    "protocol": "HTTP",
+    "priority": 93,
+    "match": "(?is)^HTTP/.*\\r?\\nServer:\\s*Jetty\\(",
+    "product": { "re": "(?im)^Server:\\s*([^\\s/\\(]+)", "tpl": "$1" },
+    "version": { "re": "(?im)^Server:\\s*Jetty\\(([^\\)]+)\\)", "tpl": "$1" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.93
+  },
+  {
+    "id": "http-iis",
+    "protocol": "HTTP",
+    "priority": 92,
+    "match": "(?is)^HTTP/.*\\r?\\nServer:\\s*Microsoft-IIS/",
+    "product": { "re": "(?im)^Server:\\s*([^\\s/\\(]+)", "tpl": "$1" },
+    "version": { "re": "(?im)^Server:\\s*Microsoft-IIS/([^\\s\\(]+)", "tpl": "$1" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.93
+  },
+  {
+    "id": "mysql-handshake",
+    "protocol": "MySQL",
+    "priority": 90,
+    "match": "J\\x00\\x00\\x00\\n[^\\x00]+\\x00",
+    "product": { "re": "J\\x00\\x00\\x00\\n", "tpl": "MySQL" },
+    "version": { "re": "J\\x00\\x00\\x00\\n([^\\x00]+)\\x00", "tpl": "$1" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.95
+  },
+  {
+    "id": "ftp-proftpd",
+    "protocol": "FTP",
+    "priority": 80,
+    "match": "(?i)^220.*ProFTPD",
+    "product": { "re": "(?i)^220.*?(ProFTPD)", "tpl": "$1" },
+    "version": { "re": "(?i)^220.*?ProFTPD\\s+([0-9][^\\s\\)]*)", "tpl": "$1" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.9
+  },
+  {
+    "id": "ftp-vsftpd",
+    "protocol": "FTP",
+    "priority": 79,
+    "match": "(?i)^220.*vsFTPd",
+    "product": { "re": "(?i)^220.*?(vsFTPd)", "tpl": "$1" },
+    "version": { "re": "(?i)^220.*?vsFTPd\\s+([0-9][^\\s\\)]*)", "tpl": "$1" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.9
+  },
+  {
+    "id": "ftp-pure-ftpd",
+    "protocol": "FTP",
+    "priority": 78,
+    "match": "(?i)^220.*Pure-FTPd",
+    "product": { "re": "(?i)^220.*?(Pure-FTPd)", "tpl": "$1" },
+    "version": { "re": "(?i)^220.*?Pure-FTPd\\s+([0-9][^\\s\\)]*)", "tpl": "$1" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.9
+  },
+  {
+    "id": "redis-simple",
+    "protocol": "Redis",
+    "priority": 70,
+    "match": "^(\\+PONG|-ERR|-NOAUTH)",
+    "product": { "re": "^(\\+PONG|-ERR|-NOAUTH)", "tpl": "Redis" },
+    "version": { "re": "", "tpl": "" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.9
+  },
+  {
+    "id": "tls-record-0303",
+    "protocol": "TLS",
+    "priority": 60,
+    "match": "\\x16\\x03\\x03",
+    "product": { "re": "\\x16\\x03\\x03", "tpl": "TLS" },
+    "version": { "re": "\\x16\\x03\\x03", "tpl": "1.2" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.88
+  },
+  {
+    "id": "tls-record-0301",
+    "protocol": "TLS",
+    "priority": 59,
+    "match": "\\x16\\x03\\x01",
+    "product": { "re": "\\x16\\x03\\x01", "tpl": "TLS" },
+    "version": { "re": "\\x16\\x03\\x01", "tpl": "1.0" },
+    "os": { "re": "", "tpl": "" },
+    "confidence": 0.88
+  }
+]
