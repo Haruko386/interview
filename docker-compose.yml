@@ -1,0 +1,23 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: server.Dockerfile
+    image: banner-fingerprint-server:local
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./rules:/app/rules:ro
+    read_only: true
+    tmpfs:
+      - /tmp
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: [ "CMD", "/app/server", "healthcheck" ]
+      interval: 10s
+      timeout: 3s
+      start_period: 10s
+      retries: 3
